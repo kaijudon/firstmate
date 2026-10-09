@@ -1,0 +1,6 @@
+payload: stale: lab:fm-held (paused 901s, awaiting external - declared pause, rechecked on a long cadence not a wedge; confirm the wait still holds) task=held
+  daemon log: [2026-10-09T15:18:01+0800] self-handle (paused): stale: lab:fm-held (paused 901s, awaiting external - declared pause, rechecked on a long cadence not a wedge; confirm the wait still holds) task=held -> paused (awaiting e
+  markers: .subsuper-paused-held 
+payload: stale: lab:fm-held task=held
+  daemon log: [2026-10-09T15:18:01+0800] self-handle: stale: lab:fm-held task=held -> transient stale (lab:fm-held task=held): no status
+  markers: .subsuper-stale-held task=held 

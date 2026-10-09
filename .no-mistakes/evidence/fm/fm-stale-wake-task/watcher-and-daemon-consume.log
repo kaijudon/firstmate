@@ -1,0 +1,8 @@
+=== real watcher stdout (rc=0):
+stale: lab:fm-held (unread firstmate instruction: /tmp/fm-wd.Kc0RZO/fm/state/held.inbox/001.msg is unhandled and the worker's agent has exited or its endpoint is missing, so the doorbell was not typed; recover the worker) task=held
+=== queued stale rows (payload column):
+stale: lab:fm-held (unread firstmate instruction: /tmp/fm-wd.Kc0RZO/fm/state/held.inbox/001.msg is unhandled and the worker's agent has exited or its endpoint is missing, so the doorbell was not typed; recover the worker) task=held
+=== daemon handle_wake on each queued payload:
+handle_wake rc=0
+daemon marker: .subsuper-paused-held
+---

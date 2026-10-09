@@ -1,0 +1,2 @@
+1791531077	start	gen=host-202420-1791531077	primary=claude
+1791531105	handled	turn=host-202420-1791531077.1	posture=away	rc=0	reports=1	error=0 cost=0.040232 conversation_cost=0.040232 input=14 cache_read=90649 cache_write=2926 output=1037 turns=7	stale: lab:fm-held

@@ -1,0 +1,30 @@
+USER: FIRSTMATE SUPERVISION WAKE: stale: lab:fm-held (paused 901s, awaiting external - declared pause, rechecked on a long cadence not a wedge; confirm the wait still holds) task=held
+
+TOOL_USE: {"command": "bin/fm-wake-drain.sh; bin/fm-crew-state.sh held"}
+RESULT(err=False): 1791530169	1	stale	lab:fm-held	stale: lab:fm-held (paused 901s, awaiting external - declared pause, rechecked on a long cadence not a wedge; confirm the wait still holds) task=held
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 3344896.1791530169.btsn1u
+state: unknown · source: pane · harness state unavailable (unknown missing)
+
+TOOL_USE: {"command": "tail -5 state/held.status* state/held.log 2>/dev/null; ls state | grep held; bin/fm-branch-report.sh --help 2>&1 | head -15"}
+RESULT(err=False): held.meta
+held.status
+Usage:
+  fm-branch-report.sh --task <id|fleet> --verdict routine|captain \
+      --summary <text> [--silent true|false] [--wake <text>]
+
+The verdict criteria are owned by bin/fm-branch-prompt.sh ("Verdict: routine
+or captain"); --silent true is legal only for a routine outcome.
+--wake defaults to the wake reason the host recorded for the turn.
+
+TOOL_USE: {"command": "cat state/held.status; cat state/held.meta"}
+RESULT(err=False): paused: holding for the upstream tool release
+project=demo
+window=lab:fm-held
+backend=tmux
+harness=claude
+kind=ship
+worktree=/tmp/fm-stale-task-live.lxdtkW/wt
+
+TOOL_USE: {"command": "bin/fm-branch-report.sh --task held --verdict routine --silent true --summary \"Worker 'held' is still paused, waiting on an upstream tool release. Nothing has changed and I took no action.\" && bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 3344896.1791530169.btsn1u"}
+RESULT(err=False): recorded seq 1 [routine]; silent outcome remains in the outcome store
+

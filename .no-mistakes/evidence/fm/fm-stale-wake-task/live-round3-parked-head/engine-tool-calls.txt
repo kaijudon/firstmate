@@ -1,0 +1,22 @@
+USER: FIRSTMATE SUPERVISION WAKE: stale: lab:fm-held (paused 902s, awaiting external - declared pause, rechecked on a long cadence not a wedge; confirm the wait still holds) task=held
+
+TOOL_USE: {"command": "bin/fm-wake-drain.sh"}
+RESULT(err=False): 1791533901	1	stale	lab:fm-held	stale: lab:fm-held (paused 902s, awaiting external - declared pause, rechecked on a long cadence not a wedge; confirm the wait still holds) task=held
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 2864283.1791533901.3wu2ed
+
+TOOL_USE: {"command": "bin/fm-crew-state.sh held; tail -5 state/held.status 2>/dev/null"}
+RESULT(err=False): state: unknown · source: pane · harness state unavailable (unknown missing)
+paused: holding for the upstream tool release
+
+TOOL_USE: {"command": "bin/fm-branch-report.sh --help 2>&1 | head -15"}
+RESULT(err=False): Usage:
+  fm-branch-report.sh --task <id|fleet> --verdict routine|captain \
+      --summary <text> [--silent true|false] [--wake <text>]
+
+The verdict criteria are owned by bin/fm-branch-prompt.sh ("Verdict: routine
+or captain"); --silent true is legal only for a routine outcome.
+--wake defaults to the wake reason the host recorded for the turn.
+
+TOOL_USE: {"command": "bin/fm-branch-report.sh --task held --verdict routine --silent false --summary \"Worker 'held' is on a declared pause waiting for an upstream tool release; the wait still holds. Its pane reads as missing, so I took no action and the next wake can recheck.\" && bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 2864283.1791533901.3wu2ed"}
+RESULT(err=False): recorded seq 1 [routine]; it waits in the outcome store for MAIN
+

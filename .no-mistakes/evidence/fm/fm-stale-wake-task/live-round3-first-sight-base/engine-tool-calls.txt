@@ -1,0 +1,37 @@
+USER: FIRSTMATE SUPERVISION WAKE: stale: lab:fm-held
+
+TOOL_USE: {"command": "bin/fm-wake-drain.sh"}
+RESULT(err=False): 1791533904	1	stale	lab:fm-held	stale: lab:fm-held
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 2864281.1791533904.b1Ktr5
+
+TOOL_USE: {"command": "bin/fm-crew-state.sh lab:fm-held; ls state | grep -i held"}
+RESULT(err=False): state: unknown · source: none · no metadata for lab:fm-held
+held.meta
+held.status
+
+TOOL_USE: {"command": "cat state/held.meta; tail -5 state/held.status; bin/fm-crew-state.sh held"}
+RESULT(err=False): project=demo
+window=lab:fm-held
+backend=tmux
+harness=claude
+kind=ship
+worktree=/tmp/fm-stale-task-live.Xl9ZjV/wt
+paused: holding for the upstream tool release
+state: unknown · source: pane · harness state unavailable (unknown missing)
+
+TOOL_USE: {"command": "bin/fm-branch-report.sh --help 2>&1 | head -15"}
+RESULT(err=False): Usage:
+  fm-branch-report.sh --task <id|fleet> --verdict routine|captain \
+      --summary <text> [--silent true|false] [--wake <text>]
+
+The verdict criteria are owned by bin/fm-branch-prompt.sh ("Verdict: routine
+or captain"); --silent true is legal only for a routine outcome.
+--wake defaults to the wake reason the host recorded for the turn.
+
+TOOL_USE: {"command": "bin/fm-branch-report.sh --task held --verdict routine --silent false --summary \"Task 'held' went stale, but its last status says it is deliberately paused until the upstream tool release, so I took no action. Its tmux window is no longer visible, so it may need a look on return. I did not relaunch it, since it is paused by design and you said to merge and dispatch nothing.\"\nbin/fm-wake-drain.sh --ack-through 1 --recovery-generation 2864281.1791533904.b1Ktr5"}
+RESULT(err=False): recorded seq 1 [routine]; it waits in the outcome store for MAIN
+
+TOOL_USE: {"command": "bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 2864281.1791533904.b1Ktr5"}
+RESULT(err=True): Exit code 1
+wake drain: no branch-eligible row snapshot at /tmp/fm-stale-task-live.Xl9ZjV/fm/state/.branch-eligible-rows; refusing to guess what this actor may consume
+

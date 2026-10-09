@@ -1,0 +1,6 @@
+== PRE-FIX test_nonterminal_stale_paused_absorbed_then_resurfaced
+not ok - re-surface line does not name the task id: stale: test:fm-held (paused 501s, awaiting external - declared pause, rechecked on a long cadence not a wedge; confirm the wait still holds)
+rc=1
+== PRE-FIX test_write_deferral_resurfaces_on_the_bounded_cadence
+not ok - the write-deferral recheck does not name the task id: stale: test:fm-churn (idle 501s, writing its worktree for 501s, rechecked on a long cadence not a wedge; confirm the writes are real progress)
+rc=1

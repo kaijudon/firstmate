@@ -1,0 +1,4 @@
+not ok - [paused-pipeline-churn] replacement declared wait changed the wake identity: 1791534946	2	stale	test:fm-parked	stale: test:fm-parked
+not ok - re-surface line does not name the task id: stale: test:fm-held (paused 501s, awaiting external - declared pause, rechecked on a long cadence not a wedge; confirm the wait still holds)
+not ok - the write-deferral recheck does not name the task id: stale: test:fm-churn (idle 500s, writing its worktree for 500s, rechecked on a long cadence not a wedge; confirm the writes are real progress)
+not ok - AFK paused stale did not preserve its plain window identity: stale: test:fm-afk-held

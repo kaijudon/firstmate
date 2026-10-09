@@ -1,0 +1,36 @@
+USER: FIRSTMATE SUPERVISION WAKE: stale: lab:fm-held (paused 901s, awaiting external - declared pause, rechecked on a long cadence not a wedge; confirm the wait still holds)
+
+TOOL_USE: {"command": "bin/fm-wake-drain.sh; bin/fm-crew-state.sh lab"}
+RESULT(err=False): 1791530199	1	stale	lab:fm-held	stale: lab:fm-held (paused 901s, awaiting external - declared pause, rechecked on a long cadence not a wedge; confirm the wait still holds)
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 3392947.1791530199.YcpD9k
+state: unknown · source: none · no metadata for lab
+
+TOOL_USE: {"command": "ls state | head -30; tail -5 state/lab.status 2>/dev/null; grep -n \"lab\" data/backlog.md | head"}
+RESULT(err=False): held.meta
+held.status
+home-summary.json
+terminal-outcomes
+ugrep: warning: data/backlog.md: No such file or directory
+
+TOOL_USE: {"command": "cat state/held.meta; tail -5 state/held.status; bin/fm-crew-state.sh held"}
+RESULT(err=False): project=demo
+window=lab:fm-held
+backend=tmux
+harness=claude
+kind=ship
+worktree=/tmp/fm-stale-task-live.ckdxS7/wt
+paused: holding for the upstream tool release
+state: unknown · source: pane · harness state unavailable (unknown missing)
+
+TOOL_USE: {"command": "bin/fm-branch-report.sh --help 2>&1 | head -15"}
+RESULT(err=False): Usage:
+  fm-branch-report.sh --task <id|fleet> --verdict routine|captain \
+      --summary <text> [--silent true|false] [--wake <text>]
+
+The verdict criteria are owned by bin/fm-branch-prompt.sh ("Verdict: routine
+or captain"); --silent true is legal only for a routine outcome.
+--wake defaults to the wake reason the host recorded for the turn.
+
+TOOL_USE: {"command": "bin/fm-branch-report.sh --task held --verdict routine --silent true --summary \"Worker 'held' is still paused, waiting on the upstream tool release. The pause still holds and no action was taken.\"; bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 3392947.1791530199.YcpD9k"}
+RESULT(err=False): recorded seq 1 [routine]; silent outcome remains in the outcome store
+

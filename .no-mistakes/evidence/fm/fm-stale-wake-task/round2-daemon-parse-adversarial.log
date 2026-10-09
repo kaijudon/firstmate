@@ -1,0 +1,9 @@
+payload: stale: lab:fm-held (task=held)
+tail: cannot open '/tmp/fm-adv.gbIo37/fm/state/.subsuper.log' for reading: No such file or directory
+  markers: .subsuper-paused-held 
+payload: stale: lab:fm-held (paused 903s, awaiting external - declared pause, rechecked on a long cadence not a wedge; confirm the wait still holds) task=held
+tail: cannot open '/tmp/fm-adv.gbIo37/fm/state/.subsuper.log' for reading: No such file or directory
+  markers: .subsuper-paused-held 
+payload: stale: lab:fm-held task=held
+tail: cannot open '/tmp/fm-adv.gbIo37/fm/state/.subsuper.log' for reading: No such file or directory
+  markers: .subsuper-stale-held task=held 

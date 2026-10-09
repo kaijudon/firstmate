@@ -1,0 +1,30 @@
+USER: FIRSTMATE SUPERVISION WAKE: stale: lab:fm-held (task=held)
+
+TOOL_USE: {"command": "bin/fm-wake-drain.sh"}
+RESULT(err=False): 1791533904	1	stale	lab:fm-held	stale: lab:fm-held (task=held)
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 2864571.1791533904.PPh4oM
+
+TOOL_USE: {"command": "bin/fm-crew-state.sh held; ls state/held.inbox 2>/dev/null; tail -5 state/held.status 2>/dev/null"}
+RESULT(err=False): state: unknown · source: pane · harness state unavailable (unknown missing)
+paused: holding for the upstream tool release
+
+TOOL_USE: {"command": "bin/fm-branch-report.sh --help 2>&1 | head -20"}
+RESULT(err=False): Usage:
+  fm-branch-report.sh --task <id|fleet> --verdict routine|captain \
+      --summary <text> [--silent true|false] [--wake <text>]
+
+The verdict criteria are owned by bin/fm-branch-prompt.sh ("Verdict: routine
+or captain"); --silent true is legal only for a routine outcome.
+--wake defaults to the wake reason the host recorded for the turn.
+
+TOOL_USE: {"command": "bin/fm-branch-report.sh --task held --verdict routine --silent false --summary \"Task 'held' went stale, but its last status says it is deliberately paused until the upstream tool release, and its pane is gone. No action taken (no relaunch, since it is intentionally parked); it will need a restart when the release lands.\" && bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 2864571.1791533904.PPh4oM"}
+RESULT(err=False): recorded seq 1 [routine]; it waits in the outcome store for MAIN
+
+TOOL_USE: {"command": "bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 2864571.1791533904.PPh4oM"}
+RESULT(err=True): Exit code 1
+wake drain: no branch-eligible row snapshot at /tmp/fm-stale-task-live.hdObnE/fm/state/.branch-eligible-rows; refusing to guess what this actor may consume
+
+TOOL_USE: {"command": "bin/fm-wake-drain.sh"}
+RESULT(err=True): Exit code 1
+wake drain: no branch-eligible row snapshot at /tmp/fm-stale-task-live.hdObnE/fm/state/.branch-eligible-rows; refusing to guess what this actor may consume
+
