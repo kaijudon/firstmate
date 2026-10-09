@@ -1,0 +1,15 @@
+### HEAD 5c4eeb5 (fix)
+ok - ack-through prints one confirmation line naming the cutoff and rows consumed
+wake drain: acknowledged wakes through 1 (1 row(s) consumed)
+ok - wake drain: an acknowledgement that consumes nothing says so and names the exact command for the current wake
+wake drain: acknowledged wakes through 3 (2 row(s) consumed)
+ok - wake drain: a stale acknowledgement cannot retire or consume a newer recovery episode
+ok - wake drain: recovery acknowledgement failures are explicit and retryable
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 161531.1791531019.nQPVND
+wake drain: acknowledged wakes through 40 (40 row(s) consumed)
+ok - concurrent append plus drain preserves durable records through acknowledgement
+[exit 0]
+
+### base 19fcbbd drain + new test (sabotage check)
+not ok - successful acknowledgement did not print its confirmation line: 
+[exit 1]

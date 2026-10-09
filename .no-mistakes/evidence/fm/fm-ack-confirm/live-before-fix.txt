@@ -1,0 +1,61 @@
+== base commit 19fcbbd (pre-fix)
+fatal: not a git repository (or any of the parent directories): .git
+
+== S1: one wake -> drain -> run the printed WAKE_ACK_REQUIRED command
+$ bin/fm-wake-drain.sh 
+  [stdout]
+    1791530975	1	signal	confirm	signal: confirm.status
+  [stderr]
+    WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 121725.1791530975.XqrOWE
+  [exit 0]
+printed ack command: bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 121725.1791530975.XqrOWE
+$ bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 121725.1791530975.XqrOWE
+  [stdout]
+  [stderr]
+  [exit 0]
+queue rows after ack: 0
+
+== S2: repeat the same acknowledgement (nothing left, nothing pending)
+$ bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 121725.1791530975.XqrOWE
+  [stdout]
+  [stderr]
+  [exit 0]
+
+== S3: three wakes -> drain -> ack the batch
+$ bin/fm-wake-drain.sh 
+  [stdout]
+    1791530976	2	signal	a	signal: a.status
+    1791530976	3	signal	b	signal: b.status
+    1791530976	4	signal	c	signal: c.status
+  [stderr]
+    WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 4 --recovery-generation 122389.1791530976.YPYUg3
+  [exit 0]
+printed ack command: bin/fm-wake-drain.sh --ack-through 4 --recovery-generation 122389.1791530976.YPYUg3
+$ bin/fm-wake-drain.sh --ack-through 4 --recovery-generation 122389.1791530976.YPYUg3
+  [stdout]
+  [stderr]
+  [exit 0]
+queue rows after ack: 0
+
+== S4 (adversarial): stale ack below a presented, still-pending wake
+$ bin/fm-wake-drain.sh 
+  [stdout]
+    1791530977	5	signal	d	signal: d.status
+  [stderr]
+    WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 5 --recovery-generation 123092.1791530977.Xq4l6H
+  [exit 0]
+printed ack command: bin/fm-wake-drain.sh --ack-through 5 --recovery-generation 123092.1791530977.Xq4l6H
+$ bin/fm-wake-drain.sh --ack-through 4 --recovery-generation 123092.1791530977.Xq4l6H
+  [stdout]
+  [stderr]
+    wake drain: nothing was acknowledged through 4 (none of your presented wake rows is at or below it); the current wake is row 5: run bin/fm-wake-drain.sh --ack-through 5 --recovery-generation 123092.1791530977.Xq4l6H after handling it
+  [exit 0]
+queue rows after stale ack: 1
+
+== S5 (adversarial): malformed --ack-through
+$ bin/fm-wake-drain.sh --ack-through notanumber --recovery-generation 123092.1791530977.Xq4l6H
+  [stdout]
+  [stderr]
+    wake drain: invalid acknowledgement sequence
+  [exit 2]
+queue rows after malformed ack: 1

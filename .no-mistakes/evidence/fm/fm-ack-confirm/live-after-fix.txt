@@ -1,0 +1,84 @@
+== commit 5c4eeb5 | FM_HOME=lab
+
+== S1: one wake -> drain -> run the printed WAKE_ACK_REQUIRED command
+$ bin/fm-wake-drain.sh 
+  [stdout]
+    1791530990	1	signal	confirm	signal: confirm.status
+  [stderr]
+    WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 127998.1791530990.PUq2VW
+  [exit 0]
+printed ack command: bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 127998.1791530990.PUq2VW
+$ bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 127998.1791530990.PUq2VW
+  [stdout]
+  [stderr]
+    wake drain: acknowledged wakes through 1 (1 row(s) consumed)
+  [exit 0]
+queue rows after ack: 0
+
+== S2: repeat the same acknowledgement (nothing left, nothing pending)
+$ bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 127998.1791530990.PUq2VW
+  [stdout]
+  [stderr]
+    wake drain: acknowledged wakes through 1 (0 row(s) consumed)
+  [exit 0]
+
+== S3: three wakes -> drain -> ack the batch
+$ bin/fm-wake-drain.sh 
+  [stdout]
+    1791530991	2	signal	a	signal: a.status
+    1791530991	3	signal	b	signal: b.status
+    1791530991	4	signal	c	signal: c.status
+  [stderr]
+    WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 4 --recovery-generation 129724.1791530991.vTVo2z
+  [exit 0]
+printed ack command: bin/fm-wake-drain.sh --ack-through 4 --recovery-generation 129724.1791530991.vTVo2z
+$ bin/fm-wake-drain.sh --ack-through 4 --recovery-generation 129724.1791530991.vTVo2z
+  [stdout]
+  [stderr]
+    wake drain: acknowledged wakes through 4 (3 row(s) consumed)
+  [exit 0]
+queue rows after ack: 0
+
+== S4 (adversarial): stale ack below a presented, still-pending wake
+$ bin/fm-wake-drain.sh 
+  [stdout]
+    1791530992	5	signal	d	signal: d.status
+  [stderr]
+    WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 5 --recovery-generation 131498.1791530992.8b1ffT
+  [exit 0]
+printed ack command: bin/fm-wake-drain.sh --ack-through 5 --recovery-generation 131498.1791530992.8b1ffT
+$ bin/fm-wake-drain.sh --ack-through 4 --recovery-generation 131498.1791530992.8b1ffT
+  [stdout]
+  [stderr]
+    wake drain: nothing was acknowledged through 4 (none of your presented wake rows is at or below it); the current wake is row 5: run bin/fm-wake-drain.sh --ack-through 5 --recovery-generation 131498.1791530992.8b1ffT after handling it
+  [exit 0]
+queue rows after stale ack: 1
+
+== S5 (adversarial): malformed --ack-through
+$ bin/fm-wake-drain.sh --ack-through notanumber --recovery-generation 131498.1791530992.8b1ffT
+  [stdout]
+  [stderr]
+    wake drain: invalid acknowledgement sequence
+  [exit 2]
+queue rows after malformed ack: 1
+
+== S6 (adversarial): ack under a recovery generation that no longer matches the marker
+$ bin/fm-wake-drain.sh --ack-through 5 --recovery-generation 131498.1791530992.8b1ffT
+  [stdout]
+  [stderr]
+    wake drain: acknowledged wakes through 5 (1 row(s) consumed)
+  [exit 0]
+$ bin/fm-wake-drain.sh 
+  [stdout]
+    1791530993	6	signal	e	signal: e.status
+  [stderr]
+    WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 6 --recovery-generation 133244.1791530993.F1kY5B
+  [exit 0]
+printed ack command: bin/fm-wake-drain.sh --ack-through 6 --recovery-generation 133244.1791530993.F1kY5B
+$ bin/fm-wake-drain.sh --ack-through 6 --recovery-generation 1.1.superseded
+  [stdout]
+  [stderr]
+    wake drain: acknowledged wakes through 6 (1 row(s) consumed), but a newer recovery episode is pending; re-run bin/fm-wake-drain.sh and use the new WAKE_ACK_REQUIRED command
+  [exit 0]
+queue rows after ack: 0
+stderr line count: 1
