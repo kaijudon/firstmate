@@ -1,0 +1,2 @@
+1792813162	start	gen=host-1282238-1792813162	primary=claude
+1792813177	handled	turn=host-1282238-1792813162.1	posture=away	rc=0	reports=1	error=0 cost=0.077714 conversation_cost=0.077714 input=10 cache_read=72000 cache_write=15766 output=743 turns=5	stale: lab:fm-held (paused 902s, awaiting external - declared pause, rechecked on a long cadence not a wedge; confirm the wait still holds) task=held

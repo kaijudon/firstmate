@@ -1,0 +1,6 @@
+engine=claude
+model=sonnet
+session=ba456a14-ad35-495b-9228-8a408ccb73b5
+key=1282242:3554175818:4294967295
+turns=1
+conversation_cost=0.028991

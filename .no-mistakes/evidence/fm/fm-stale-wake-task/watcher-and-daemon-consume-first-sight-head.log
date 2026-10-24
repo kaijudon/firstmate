@@ -1,0 +1,8 @@
+=== real watcher stdout (rc=0):
+stale: lab:fm-held (task=held)
+=== queued stale rows (payload column):
+stale: lab:fm-held (task=held)
+=== daemon handle_wake on each queued payload:
+handle_wake rc=0
+daemon marker: .subsuper-paused-held
+---

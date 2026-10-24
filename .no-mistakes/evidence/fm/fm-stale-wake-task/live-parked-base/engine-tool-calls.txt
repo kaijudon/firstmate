@@ -1,0 +1,47 @@
+USER: FIRSTMATE SUPERVISION WAKE: stale: lab:fm-held (paused 901s, awaiting external - declared pause, rechecked on a long cadence not a wedge; confirm the wait still holds)
+
+TOOL_USE: {"command": "bin/fm-wake-drain.sh; bin/fm-crew-state.sh lab:fm-held"}
+RESULT(err=False): 1792813213	1	stale	lab:fm-held	stale: lab:fm-held (paused 901s, awaiting external - declared pause, rechecked on a long cadence not a wedge; confirm the wait still holds)
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 1314084.1792813213.VrpsA3
+state: unknown · source: none · no metadata for lab:fm-held
+
+TOOL_USE: {"command": "bin/fm-wake-drain.sh; bin/fm-crew-state.sh lab:fm-held"}
+TOOL_USE: {"command": "ls state | head -30; tail -5 state/lab:fm-held.status 2>/dev/null; ls state/*held* 2>/dev/null"}
+RESULT(err=False): held.meta
+held.status
+home-summary.json
+terminal-outcomes
+state/held.meta
+state/held.status
+
+TOOL_USE: {"command": "ls state | head -30; tail -5 state/lab:fm-held.status 2>/dev/null; ls state/*held* 2>/dev/null"}
+TOOL_USE: {"command": "tail -5 state/held.status; cat state/held.meta; bin/fm-crew-state.sh held"}
+RESULT(err=False): paused: holding for the upstream tool release
+project=demo
+window=lab:fm-held
+backend=tmux
+harness=claude
+kind=ship
+worktree=/tmp/fm-stale-task-live.KLjS6q/wt
+state: unknown · source: pane · harness state unavailable (unknown missing)
+
+TOOL_USE: {"command": "tail -5 state/held.status; cat state/held.meta; bin/fm-crew-state.sh held"}
+TOOL_USE: {"command": "bin/fm-branch-report.sh --help 2>&1 | head -15"}
+RESULT(err=False): Usage:
+  fm-branch-report.sh --task <id|fleet> --verdict routine|captain \
+      --summary <text> [--silent true|false] [--wake <text>]
+
+The verdict criteria are owned by bin/fm-branch-prompt.sh ("Verdict: routine
+or captain"); --silent true is legal only for a routine outcome.
+--wake defaults to the wake reason the host recorded for the turn.
+
+TOOL_USE: {"command": "bin/fm-branch-report.sh --help 2>&1 | head -15"}
+TOOL_USE: {"command": "bin/fm-branch-report.sh --task held --verdict routine --silent false --summary \"Worker 'held' (demo) is on a declared pause waiting for an upstream tool release; nothing external I can verify, and its pane state reads unknown. No action taken (away: merge/dispatch nothing); the wait is still presumed to hold.\" && bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 1314084.1792813213.VrpsA3"}
+RESULT(err=False): recorded seq 1 [routine]; it waits in the outcome store for MAIN
+
+TOOL_USE: {"command": "bin/fm-branch-report.sh --task held --verdict routine --silent false --summary \"Worker 'held' (demo) is on a declared pause waiting for an upstream tool release; nothing external I can verify, and its pane state reads unknown. No action taken (away: merge/dispatch nothing); the wait is still presumed to hold.\" && bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 1314084.1792813213.VrpsA3"}
+TOOL_USE: {"command": "bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 1314084.1792813213.VrpsA3; echo rc=$?"}
+RESULT(err=False): wake drain: no branch-eligible row snapshot at /tmp/fm-stale-task-live.KLjS6q/fm/state/.branch-eligible-rows; refusing to guess what this actor may consume
+rc=1
+
+TOOL_USE: {"command": "bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 1314084.1792813213.VrpsA3; echo rc=$?"}

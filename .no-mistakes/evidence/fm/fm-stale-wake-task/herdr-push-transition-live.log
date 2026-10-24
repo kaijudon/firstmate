@@ -1,0 +1,5 @@
+ok - real herdr (herdr 0.9.4): events.subscribe capability gate passes (protocol >= 16, events surface present in api schema)
+ok - real herdr (herdr 0.9.4): a driven idle->blocked transition returns the blocked record in 0.329s (pane w1:p2)
+QUEUED PAYLOAD: stale: fm-lab-eventwait-smoke-1506728:w1:p2 (herdr: agent blocked - waiting on human, escalated immediately, not via wedge timer) task=evwait1
+ok - real herdr: push-transition stale payload ends with task=evwait1
+ok - real herdr: the watcher fast-path enqueues a stale wake naming the task window from the live blocked transition

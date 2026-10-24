@@ -1,0 +1,38 @@
+USER: FIRSTMATE SUPERVISION WAKE: stale: lab:fm-held (task=held)
+
+TOOL_USE: {"command": "bin/fm-wake-drain.sh"}
+RESULT(err=False): 1792813166	1	stale	lab:fm-held	stale: lab:fm-held (task=held)
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 1283409.1792813166.Q0X5bu
+
+TOOL_USE: {"command": "bin/fm-wake-drain.sh"}
+TOOL_USE: {"command": "bin/fm-crew-state.sh held"}
+RESULT(err=False): state: unknown · source: pane · harness state unavailable (unknown missing)
+
+TOOL_USE: {"command": "bin/fm-crew-state.sh held"}
+TOOL_USE: {"command": "cat state/held.meta; tail -5 state/held.status* 2>/dev/null; ls state | grep held; grep -n held data/backlog.md | head"}
+RESULT(err=False): project=demo
+window=lab:fm-held
+backend=tmux
+harness=claude
+kind=ship
+worktree=/tmp/fm-stale-task-live.jRprFv/wt
+paused: holding for the upstream tool release
+held.meta
+held.status
+ugrep: warning: data/backlog.md: No such file or directory
+
+TOOL_USE: {"command": "cat state/held.meta; tail -5 state/held.status* 2>/dev/null; ls state | grep held; grep -n held data/backlog.md | head"}
+TOOL_USE: {"command": "bin/fm-branch-report.sh --help 2>&1 | head -15"}
+RESULT(err=False): Usage:
+  fm-branch-report.sh --task <id|fleet> --verdict routine|captain \
+      --summary <text> [--silent true|false] [--wake <text>]
+
+The verdict criteria are owned by bin/fm-branch-prompt.sh ("Verdict: routine
+or captain"); --silent true is legal only for a routine outcome.
+--wake defaults to the wake reason the host recorded for the turn.
+
+TOOL_USE: {"command": "bin/fm-branch-report.sh --help 2>&1 | head -15"}
+TOOL_USE: {"command": "bin/fm-branch-report.sh --task held --verdict captain --summary \"The 'held' worker is paused waiting for an upstream tool release, but its terminal window is gone and can't be reclaimed automatically on tmux. I changed nothing and left the worktree intact. Whether to relaunch it after the release lands is for your return.\"\nbin/fm-wake-drain.sh --ack-through 1 --recovery-generation 1283409.1792813166.Q0X5bu"}
+RESULT(err=False): recorded seq 1 [captain]; it waits in the outcome store for MAIN
+
+TOOL_USE: {"command": "bin/fm-branch-report.sh --task held --verdict captain --summary \"The 'held' worker is paused waiting for an upstream tool release, but its terminal window is gone and can't be reclaimed automatically on tmux. I changed nothing and left the worktree intact. Whether to relaunch it after the release lands is for your return.\"\nbin/fm-wake-drain.sh --ack-through 1 --recovery-generation 1283409.1792813166.Q0X5bu"}
