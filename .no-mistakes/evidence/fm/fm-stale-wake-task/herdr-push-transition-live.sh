@@ -13,7 +13,7 @@
 # refuses the default session and verifies the fleet-state tripwire.
 set -u
 
-ROOT=/home/cmvbioinfo/.no-mistakes/worktrees/f6f6591a3e0a/01M5NZJW4TWZZ5JBD2WT5AMMVQ
+ROOT=/home/cmvbioinfo/.no-mistakes/worktrees/f6f6591a3e0a/01M5PDP022GPG2MYRBFG4KS1FJ
 
 fail() { printf 'not ok - %s\n' "$1" >&2; cleanup_all; exit 1; }
 pass() { printf 'ok - %s\n' "$1"; }

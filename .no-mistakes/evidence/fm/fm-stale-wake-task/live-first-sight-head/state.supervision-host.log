@@ -1,2 +1,2 @@
-1792813162	start	gen=host-1282249-1792813162	primary=claude
-1792813186	handled	turn=host-1282249-1792813162.1	posture=away	rc=0	reports=1	error=0 cost=0.028991 conversation_cost=0.028991 input=12 cache_read=102325 cache_write=2706 output=791 turns=6	stale: lab:fm-held (task=held)
+1792827877	start	gen=host-829546-1792827877	primary=claude
+1792827901	handled	turn=host-829546-1792827877.1	posture=away	rc=0	reports=1	error=0 cost=0.086407 conversation_cost=0.086407 input=14 cache_read=107449 cache_write=16156 output=1101 turns=7	stale: lab:fm-held (task=held)

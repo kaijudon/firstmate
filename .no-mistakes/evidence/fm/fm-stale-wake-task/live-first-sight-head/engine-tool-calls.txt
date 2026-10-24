@@ -1,27 +1,26 @@
 USER: FIRSTMATE SUPERVISION WAKE: stale: lab:fm-held (task=held)
 
 TOOL_USE: {"command": "bin/fm-wake-drain.sh"}
-RESULT(err=False): 1792813166	1	stale	lab:fm-held	stale: lab:fm-held (task=held)
-WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 1283409.1792813166.Q0X5bu
+RESULT(err=False): 1792827881	1	stale	lab:fm-held	stale: lab:fm-held (task=held)
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 830257.1792827881.N6WO9C
 
 TOOL_USE: {"command": "bin/fm-wake-drain.sh"}
-TOOL_USE: {"command": "bin/fm-crew-state.sh held"}
-RESULT(err=False): state: unknown · source: pane · harness state unavailable (unknown missing)
+TOOL_USE: {"command": "bin/fm-crew-state.sh held; ls state/held.inbox 2>/dev/null"}
+RESULT(err=True): Exit code 2
+state: unknown · source: pane · harness state unavailable (unknown missing)
 
-TOOL_USE: {"command": "bin/fm-crew-state.sh held"}
-TOOL_USE: {"command": "cat state/held.meta; tail -5 state/held.status* 2>/dev/null; ls state | grep held; grep -n held data/backlog.md | head"}
+TOOL_USE: {"command": "bin/fm-crew-state.sh held; ls state/held.inbox 2>/dev/null"}
+TOOL_USE: {"command": "cat state/held.meta; tail -5 state/held.status* 2>/dev/null; grep -n held data/backlog.md | head"}
 RESULT(err=False): project=demo
 window=lab:fm-held
 backend=tmux
 harness=claude
 kind=ship
-worktree=/tmp/fm-stale-task-live.jRprFv/wt
+worktree=/tmp/fm-stale-task-live.4GjJYa/wt
 paused: holding for the upstream tool release
-held.meta
-held.status
 ugrep: warning: data/backlog.md: No such file or directory
 
-TOOL_USE: {"command": "cat state/held.meta; tail -5 state/held.status* 2>/dev/null; ls state | grep held; grep -n held data/backlog.md | head"}
+TOOL_USE: {"command": "cat state/held.meta; tail -5 state/held.status* 2>/dev/null; grep -n held data/backlog.md | head"}
 TOOL_USE: {"command": "bin/fm-branch-report.sh --help 2>&1 | head -15"}
 RESULT(err=False): Usage:
   fm-branch-report.sh --task <id|fleet> --verdict routine|captain \
@@ -32,7 +31,12 @@ or captain"); --silent true is legal only for a routine outcome.
 --wake defaults to the wake reason the host recorded for the turn.
 
 TOOL_USE: {"command": "bin/fm-branch-report.sh --help 2>&1 | head -15"}
-TOOL_USE: {"command": "bin/fm-branch-report.sh --task held --verdict captain --summary \"The 'held' worker is paused waiting for an upstream tool release, but its terminal window is gone and can't be reclaimed automatically on tmux. I changed nothing and left the worktree intact. Whether to relaunch it after the release lands is for your return.\"\nbin/fm-wake-drain.sh --ack-through 1 --recovery-generation 1283409.1792813166.Q0X5bu"}
-RESULT(err=False): recorded seq 1 [captain]; it waits in the outcome store for MAIN
+TOOL_USE: {"command": "bin/fm-branch-report.sh --task held --verdict routine --silent false --summary \"Worker 'held' is paused waiting on an upstream tool release; its terminal window is gone, so its live state can't be read. On tmux a missing window can't be safely relaunched, so I took no action and left it intact. It stays held for your return, and per your instructions nothing was merged or dispatched.\" && bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 830257.1792827881.N6WO9C"}
+RESULT(err=False): recorded seq 1 [routine]; it waits in the outcome store for MAIN
 
-TOOL_USE: {"command": "bin/fm-branch-report.sh --task held --verdict captain --summary \"The 'held' worker is paused waiting for an upstream tool release, but its terminal window is gone and can't be reclaimed automatically on tmux. I changed nothing and left the worktree intact. Whether to relaunch it after the release lands is for your return.\"\nbin/fm-wake-drain.sh --ack-through 1 --recovery-generation 1283409.1792813166.Q0X5bu"}
+TOOL_USE: {"command": "bin/fm-branch-report.sh --task held --verdict routine --silent false --summary \"Worker 'held' is paused waiting on an upstream tool release; its terminal window is gone, so its live state can't be read. On tmux a missing window can't be safely relaunched, so I took no action and left it intact. It stays held for your return, and per your instructions nothing was merged or dispatched.\" && bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 830257.1792827881.N6WO9C"}
+TOOL_USE: {"command": "bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 830257.1792827881.N6WO9C; echo rc=$?"}
+RESULT(err=False): wake drain: no branch-eligible row snapshot at /tmp/fm-stale-task-live.4GjJYa/fm/state/.branch-eligible-rows; refusing to guess what this actor may consume
+rc=1
+
+TOOL_USE: {"command": "bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 830257.1792827881.N6WO9C; echo rc=$?"}

@@ -1,0 +1,17 @@
+== watcher run 1
+signal: /tmp/fm-lab.vVJtGK/state/held.status
+exit=0
+1792827785	2	signal	held.status	signal: /tmp/fm-lab.vVJtGK/state/held.status
+wake annotation: latest wake-EVENT observed at drain, not current state: held.status: paused: awaiting the vendor rate-limit reset
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 2 --recovery-generation 795235.1792827785.zZHvNb
+WARNING: queued wakes pending - drain them with bin/fm-wake-drain.sh before anything else.
+== watcher run 2
+stale: lab:fm-held (task=held)
+exit=0
+1792827790	3	stale	lab:fm-held	stale: lab:fm-held (task=held)
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 3 --recovery-generation 798123.1792827790.uCQCP3
+WARNING: queued wakes pending - drain them with bin/fm-wake-drain.sh before anything else.
+== watcher run 3
+Terminated                 sleep "$POLL"
+exit=124
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 0 --recovery-generation 801354.1792827832.PoDFOA
