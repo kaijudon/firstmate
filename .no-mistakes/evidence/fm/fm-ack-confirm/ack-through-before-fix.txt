@@ -1,0 +1,36 @@
+== S1: single wake, drain, ack ==
+$ /tmp/fm-base.sdWZpL/wt/bin/fm-wake-drain.sh
+[exit 0] stdout:
+  1792809293	1	signal	alpha	signal: alpha.status
+stderr:
+  WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 3069659.1792809293.ad04oe
+$ /tmp/fm-base.sdWZpL/wt/bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 3069659.1792809293.ad04oe
+[exit 0] stdout:
+stderr:
+== S3: repeat same ack ==
+$ /tmp/fm-base.sdWZpL/wt/bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 3069659.1792809293.ad04oe
+[exit 0] stdout:
+stderr:
+== S2: three wakes, drain, ack ==
+$ /tmp/fm-base.sdWZpL/wt/bin/fm-wake-drain.sh
+[exit 0] stdout:
+  1792809295	2	signal	b1	signal: b1.status
+  1792809295	3	signal	b2	signal: b2.status
+  1792809295	4	signal	b3	signal: b3.status
+stderr:
+  WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 4 --recovery-generation 3072235.1792809295.Uw9p3n
+$ /tmp/fm-base.sdWZpL/wt/bin/fm-wake-drain.sh --ack-through 4 --recovery-generation 3072235.1792809295.Uw9p3n
+[exit 0] stdout:
+stderr:
+queue rows left: 0
+== S4: stale ack below pending presented row ==
+$ /tmp/fm-base.sdWZpL/wt/bin/fm-wake-drain.sh
+[exit 0] stdout:
+  1792809296	5	signal	c1	signal: c1.status
+stderr:
+  WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 5 --recovery-generation 3074411.1792809296.6hKkHT
+$ /tmp/fm-base.sdWZpL/wt/bin/fm-wake-drain.sh --ack-through 4 --recovery-generation 3074411.1792809296.6hKkHT
+[exit 0] stdout:
+stderr:
+  wake drain: nothing was acknowledged through 4 (none of your presented wake rows is at or below it); the current wake is row 5: run bin/fm-wake-drain.sh --ack-through 5 --recovery-generation 3074411.1792809296.6hKkHT after handling it
+queue rows left: 1
