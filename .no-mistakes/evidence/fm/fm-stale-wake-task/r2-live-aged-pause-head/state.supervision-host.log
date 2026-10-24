@@ -1,0 +1,2 @@
+1792852902	start	gen=host-2650237-1792852902	primary=claude
+1792852922	handled	turn=host-2650237-1792852902.1	posture=away	rc=0	reports=1	error=0 cost=0.091029 conversation_cost=0.091029 input=12 cache_read=88592 cache_write=18529 output=803 turns=6	stale: lab:fm-held (task=held)

@@ -1,0 +1,4 @@
+== f6b54af1
+not ok - tagged: the host never started a watcher cycle: supervision-host stood down: this session does not own supervision
+== HEAD
+not ok - tagged: the host never started a watcher cycle: supervision-host stood down: this session does not own supervision

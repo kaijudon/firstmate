@@ -1,0 +1,10 @@
+# PR #6936 tree merged onto main d96bff00, lab FM_HOME
+$ bin/fm-wake-drain.sh
+1792853630	1	stale	lab:fm-x	stale: lab:fm-x (task=x)
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 186328.1792853630.f4zrzp
+$ bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 186328.1792853630.f4zrzp
+wake drain: acknowledged wakes through 1 (1 row(s) consumed)
+rc=0
+$ (repeat, zero rows)
+wake drain: acknowledged wakes through 1 (0 row(s) consumed)
+rc=0

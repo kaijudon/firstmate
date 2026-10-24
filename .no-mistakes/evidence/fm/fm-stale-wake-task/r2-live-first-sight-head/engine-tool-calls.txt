@@ -1,0 +1,41 @@
+USER: FIRSTMATE SUPERVISION WAKE: stale: lab:fm-held (task=held)
+
+TOOL_USE: {"command": "bin/fm-wake-drain.sh"}
+RESULT(err=False): 1792852906	1	stale	lab:fm-held	stale: lab:fm-held (task=held)
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 2651524.1792852906.2Ew6la
+
+TOOL_USE: {"command": "bin/fm-wake-drain.sh"}
+TOOL_USE: {"command": "bin/fm-crew-state.sh held"}
+RESULT(err=False): state: unknown · source: pane · harness state unavailable (unknown missing)
+
+TOOL_USE: {"command": "bin/fm-crew-state.sh held"}
+TOOL_USE: {"command": "cat state/held.meta; tail -5 state/held.status* 2>/dev/null; grep -n held data/backlog.md | head"}
+RESULT(err=False): project=demo
+window=lab:fm-held
+backend=tmux
+harness=claude
+kind=ship
+worktree=/tmp/fm-stale-task-live.IzhtlO/wt
+paused: holding for the upstream tool release
+ugrep: warning: data/backlog.md: No such file or directory
+
+TOOL_USE: {"command": "cat state/held.meta; tail -5 state/held.status* 2>/dev/null; grep -n held data/backlog.md | head"}
+TOOL_USE: {"command": "bin/fm-branch-report.sh --help 2>&1 | head -20"}
+RESULT(err=False): Usage:
+  fm-branch-report.sh --task <id|fleet> --verdict routine|captain \
+      --summary <text> [--silent true|false] [--wake <text>]
+
+The verdict criteria are owned by bin/fm-branch-prompt.sh ("Verdict: routine
+or captain"); --silent true is legal only for a routine outcome.
+--wake defaults to the wake reason the host recorded for the turn.
+
+TOOL_USE: {"command": "bin/fm-branch-report.sh --help 2>&1 | head -20"}
+TOOL_USE: {"command": "bin/fm-branch-report.sh --task held --verdict routine --silent false --summary \"Worker 'held' is paused waiting for the upstream tool release, but its tmux window can no longer be found (state unknown), so I can't confirm it is alive. Tmux has no relaunch for a missing window, and your away instructions say to watch only, so I took no action; its worktree is untouched. Worth checking on your return.\" && bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 2651524.1792852906.2Ew6la"}
+RESULT(err=False): recorded seq 1 [routine]; it waits in the outcome store for MAIN
+
+TOOL_USE: {"command": "bin/fm-branch-report.sh --task held --verdict routine --silent false --summary \"Worker 'held' is paused waiting for the upstream tool release, but its tmux window can no longer be found (state unknown), so I can't confirm it is alive. Tmux has no relaunch for a missing window, and your away instructions say to watch only, so I took no action; its worktree is untouched. Worth checking on your return.\" && bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 2651524.1792852906.2Ew6la"}
+TOOL_USE: {"command": "bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 2651524.1792852906.2Ew6la; echo rc=$?"}
+RESULT(err=False): wake drain: no branch-eligible row snapshot at /tmp/fm-stale-task-live.IzhtlO/fm/state/.branch-eligible-rows; refusing to guess what this actor may consume
+rc=1
+
+TOOL_USE: {"command": "bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 2651524.1792852906.2Ew6la; echo rc=$?"}

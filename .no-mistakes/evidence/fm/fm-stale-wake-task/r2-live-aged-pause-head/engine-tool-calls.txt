@@ -1,0 +1,39 @@
+USER: FIRSTMATE SUPERVISION WAKE: stale: lab:fm-held (task=held)
+
+TOOL_USE: {"command": "bin/fm-wake-drain.sh"}
+RESULT(err=False): 1792852906	1	stale	lab:fm-held	stale: lab:fm-held (task=held)
+WAKE_ACK_REQUIRED: after handling completes run bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 2651351.1792852906.TjN6f4
+
+TOOL_USE: {"command": "bin/fm-wake-drain.sh"}
+TOOL_USE: {"command": "bin/fm-crew-state.sh held; cat state/held.meta 2>/dev/null | head -20"}
+RESULT(err=False): state: unknown · source: pane · harness state unavailable (unknown missing)
+project=demo
+window=lab:fm-held
+backend=tmux
+harness=claude
+kind=ship
+worktree=/tmp/fm-stale-task-live.qIBkBr/wt
+
+TOOL_USE: {"command": "bin/fm-crew-state.sh held; cat state/held.meta 2>/dev/null | head -20"}
+TOOL_USE: {"command": "tail -5 state/held.status 2>/dev/null; ls state | head -20"}
+RESULT(err=False): paused: holding for the upstream tool release
+held.meta
+held.status
+home-summary.json
+terminal-outcomes
+
+TOOL_USE: {"command": "tail -5 state/held.status 2>/dev/null; ls state | head -20"}
+TOOL_USE: {"command": "bin/fm-branch-report.sh --help 2>&1 | head -15"}
+RESULT(err=False): Usage:
+  fm-branch-report.sh --task <id|fleet> --verdict routine|captain \
+      --summary <text> [--silent true|false] [--wake <text>]
+
+The verdict criteria are owned by bin/fm-branch-prompt.sh ("Verdict: routine
+or captain"); --silent true is legal only for a routine outcome.
+--wake defaults to the wake reason the host recorded for the turn.
+
+TOOL_USE: {"command": "bin/fm-branch-report.sh --help 2>&1 | head -15"}
+TOOL_USE: {"command": "bin/fm-branch-report.sh --task held --verdict routine --silent false --summary \"Worker 'held' (demo) is paused waiting for an upstream tool release; its tmux window can no longer be found, and tmux tasks can't be relaunched automatically. Nothing was changed. Per your away instructions (merge nothing, dispatch nothing) I left it alone. The worktree is intact, so it needs a look on return if the pause ends.\" && bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 2651351.1792852906.TjN6f4"}
+RESULT(err=False): recorded seq 1 [routine]; it waits in the outcome store for MAIN
+
+TOOL_USE: {"command": "bin/fm-branch-report.sh --task held --verdict routine --silent false --summary \"Worker 'held' (demo) is paused waiting for an upstream tool release; its tmux window can no longer be found, and tmux tasks can't be relaunched automatically. Nothing was changed. Per your away instructions (merge nothing, dispatch nothing) I left it alone. The worktree is intact, so it needs a look on return if the pause ends.\" && bin/fm-wake-drain.sh --ack-through 1 --recovery-generation 2651351.1792852906.TjN6f4"}
