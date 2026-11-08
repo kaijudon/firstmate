@@ -1,0 +1,40 @@
+# S2 live: watcher run 3 stdout (PAUSE_RESURFACE_SECS=240, pause aged past it)
+stale: lab:fm-held (paused 727s, awaiting external - declared pause, rechecked on a long cadence not a wedge; confirm the wait still holds) task=held
+rc=0
+# queue
+1794159996	4	stale	lab:fm-held	stale: lab:fm-held (paused 727s, awaiting external - declared pause, rechecked on a long cadence not a wedge; confirm the wait still holds) task=held
+# held.meta
+window=lab:fm-held
+kind=ship
+project=demo
+
+# S3: host scope over the live lab queue (node bin/fm-branch-dispatch.mjs scope)
+rc=0
+status=safe
+corrupted=0
+rows=4
+tasks=held
+unscoped=0
+
+# wake prompt line the branch receives
+FIRSTMATE SUPERVISION WAKE: stale: lab:fm-held (paused 727s, awaiting external - declared pause, rechecked on a long cadence not a wedge; confirm the wait still holds) task=held
+
+# turn record (rows/tasks copied from scope output)
+turn=labturn1
+rows=4
+tasks=held
+unscoped=0
+posture=attended
+wake=stale: lab:fm-held (paused 727s, awaiting external - declared pause, rechecked on a long cadence not a wedge; confirm the wait still holds) task=held
+
+# report with the pane target the line starts with (the #6932 failure)
+report refused: the wake being handled (row 4) names held, not lab:fm-held; report only that task, never fleet or a task from memory
+rc=3
+
+# report with the id the line names after task=
+parsed task id: held
+recorded seq 1 [routine]; it waits in the outcome store for MAIN
+rc=0
+
+# first-sight form: id parsed from 'stale: lab:fm-held (task=held)'
+held

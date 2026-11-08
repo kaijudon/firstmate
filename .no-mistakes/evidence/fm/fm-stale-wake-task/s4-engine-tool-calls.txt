@@ -1,0 +1,35 @@
+TOOL_CALL: bin/fm-wake-drain.sh
+RESULT: Exit code 1
+wake drain: no branch-eligible row snapshot at /tmp/fm-lab.wlQpiw/state/.branch-eligible-rows; refusing to guess what this actor may consume
+TOOL_CALL: ls -a /tmp/fm-lab.wlQpiw/state | head -30; echo $FM_HOME; pwd
+RESULT: .
+..
+.branch-outcome-index-ready
+.branch-outcomes-tail.jsonl
+.count-v3.8fd8bf788431e2cc674c652368f1199fcc92e5835adf05049dad40d790ccb4bb
+.hash-v3.8fd8bf788431e2cc674c652368f1199fcc92e5835adf05049dad40d790ccb4bb
+.hb-surfaced-held
+.heartbeat-streak
+.held.branch-outcome-index
+.held.open-decisions-cursor
+TOOL_CALL: cd /tmp/fm-lab.wlQpiw; cat state/held.status | tail -5; bin/fm-crew-state.sh held 2>&1 | tail -8; tail -3 state/.wake-queue
+RESULT: paused: awaiting the vendor rate-limit reset
+/bin/bash: line 1: bin/fm-crew-state.sh: No such file or directory
+1794159996	4	stale	lab:fm-held	stale: lab:fm-held (paused 727s, awaiting external - declared pause, rechecked on a long cadence not a wedge; confirm the wait still holds) task=held
+TOOL_CALL: cd {run-worktree}; bin/fm-branch-report.sh --help 2>&1 | head -15
+RESULT: Usage:
+  fm-branch-report.sh --task <id|fleet> --verdict routine|captain \
+      --summary <text> [--silent true|false] [--wake <text>]
+
+The verdict criteria are owned by bin/fm-branch-prompt.sh ("Verdict: routine
+or captain"); --silent true is legal only for a routine outcome.
+--wake defaults to th
+TOOL_CALL: FM_HOME=/tmp/fm-lab.wlQpiw bin/fm-branch-report.sh --task held --verdict routine --silent true --summary "Worker is still paused awaiting the vendor rate-limit reset; the declared wait still holds and no action was taken. (Wake drain refused: no eligible-row snapshot, so the wake was not acknowledged.)"
+RESULT: recorded seq 2 [routine]; silent outcome remains in the outcome store
+TOOL_CALL: FM_HOME=/tmp/fm-lab.wlQpiw bin/fm-lease.sh list 2>&1 | head
+RESULT: usage: fm-lease.sh claim|release <task> [--actor main|branch] | release-actor --actor main|branch | check <task> | sweep
+FINAL: I claimed no leases, so none need releasing.
+
+Outcome for `held`: the worker is paused awaiting the vendor rate-limit reset, and the wait still holds. I took no action and reported it as a silent routine outcome.
+
+The wake drain refused to run because the branch-eligible row snapshot is missing. I never saw the drain's `WAKE_ACK_REQUIRED` line, so the wake is not acknowledged. The watcher will likely re-present it.

@@ -1,0 +1,8 @@
+1..13
+ok - a declared wait is not wedge-escalated by a working verdict, while an elapsed declaration and an undeclared lane both keep the unchanged ladder
+ok - a default-key answer leaves a keyless wait standing, while the worker's own keyless resolved line retracts it
+ok - a captain-held lane is rechecked as a hold on the captain, never as an external wait, and never at all while the captain is away
+ok - a backlog captain hold bounds the wedge ladder like a captain-held line, and stays silent while the captain is away
+ok - a gate awaiting firstmate's decision for its own run is rechecked on the long cadence in either posture, while a crewmate-owed gate, an unrelated open decision and a runless verdict keep the unchanged ladder
+Terminated                 sleep 0.1
+Terminated                 sleep "$POLL"

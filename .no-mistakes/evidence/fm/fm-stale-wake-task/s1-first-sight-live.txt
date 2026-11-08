@@ -1,0 +1,12 @@
+# S1 live: real fm-watch.sh, lab FM_HOME=/tmp/fm-lab.wlQpiw, private tmux socket fm-lab
+pane lab:fm-held cmd=sleep
+$ cat state/held.status
+paused: awaiting the vendor rate-limit reset
+$ cat state/held.meta
+window=lab:fm-held
+kind=ship
+$ watcher stdout (run 2)
+stale: lab:fm-held (task=held)
+rc=0
+$ state/.wake-queue
+1794159755	3	stale	lab:fm-held	stale: lab:fm-held (task=held)
