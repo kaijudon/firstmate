@@ -1,0 +1,4 @@
+[2026-11-10T14:50:20+0800] absorbed heartbeat (no captain-relevant change)
+[2026-11-10T14:51:38+0800] absorbed stale (paused, awaiting external, age 18568s): firstmate:fm-lab9fe3c763102d-worker
+[2026-11-10T14:51:56+0800] absorbed stale (paused, awaiting external, age 18586s): firstmate:fm-lab9fe3c763102d-worker
+[2026-11-10T14:52:12+0800] absorbed stale (paused, awaiting external, age 18602s): firstmate:fm-lab9fe3c763102d-worker

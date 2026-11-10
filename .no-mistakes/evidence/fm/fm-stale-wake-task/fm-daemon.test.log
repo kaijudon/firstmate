@@ -1,5 +1,6 @@
 ok - fm-afk-start.sh fails before daemon startup when the afk flag cannot be written
 ok - fm-afk-start.sh ignores stale pidfile-only live pids
+ok - fm-afk-start.sh refuses tern as an away-mode supervisor backend (unsupported; documented in docs/tern-backend.md)
 ok - fm-afk-start.sh reclaims stale daemon locks whose live pid identity no longer matches
 ok - supervise daemon state root is scoped by FM_HOME
 ok - routine signal self-handles
@@ -30,6 +31,16 @@ ok - housekeeping re-surfaces a forgotten captain hold on the long cadence and r
 ok - housekeeping silences a captain hold only under an away record, never under quiet mode's
 ok - a busy pane cannot gate the pause clear once its crew's status no longer declares the wait
 ok - housekeeping matures a busy pane's declared-wait window into exactly one recheck per window
+ok - away-mode housekeeping opens one overdue decision and worker resume closes it
+ok - without config/pause-ceiling an old away-mode pause keeps the plain pause recheck
+ok - a failed overdue queue stays an open decision the next housekeeping pass raises
+ok - failed enqueue followed by a worker event closes without an obsolete alert, retaining failed resolutions
+ok - a watcher-written overdue marker leaves the blocker to ordinary escalation
+ok - an open overdue decision with no marker is not opened again
+ok - unrelated blockers and repeated pauses preserve overdue decisions
+ok - initial overdue publication reconciles resumes on either side of its blocker append
+ok - overdue self-announcement preserves prior unread events without duplicate heartbeat
+ok - quiet-mode housekeeping applies the overdue pause ceiling
 ok - housekeeping bounds a distant declared time, defers to a near one, and rechecks a passed one at once
 ok - housekeeping clears a paused marker once the crew is no longer declaring the pause
 ok - housekeeping clears the pause marker once a captain hold is answered
@@ -116,6 +127,8 @@ ok - the discard seam suppresses every notifier, including command: (fires nothi
 ok - direct notifier helpers honor the discard seam, including command:
 ok - osascript channel routes through the notifier seam with the summary (never a real notification)
 ok - herdr channel routes through the notifier seam with the summary (never a real notification)
+ok - rex channel routes through the notifier seam with the summary (never a real pane write)
+ok - auto never adds the opt-in rex channel, even on a Rex supervisor pane
 ok - command channel runs the captain command with the summary on $1 and on stdin
 ok - command channel failures redact configured commands while logging their exit status
 ok - unknown channel directives are redacted while the alarm keeps running
@@ -135,6 +148,9 @@ ok - fm-send exits non-zero when initial text send fails
 ok - fm-send exits non-zero unless delivery is proven empty
 ok - discover_supervisor_backend: override > TMUX_PANE > HERDR_ENV+HERDR_PANE_ID > tmux fallback
 ok - discover_supervisor_target: override > TMUX_PANE > herdr '<session>:<pane-id>' composition > firstmate:0 fallback
+ok - discover_supervisor_{target,backend}: hc markers resolve <session>:<address> + hc; bare id, nested tmux/herdr keep their verdicts; supported list stays closed to hc
+ok - discover_supervisor_*: t3code resolves from the home's live thread after env, TMUX_PANE, and herdr; zero, ambiguous, and no-bearer fall through
+ok - pane_is_busy: t3code accepts only a settled thread with no pending request and never reads a rendered tail
 ok - pane_is_busy: herdr native busy_state='busy' short-circuits without a capture fallback
 ok - primary busy guard isolates rendered signatures by detected harness
 ok - pane_is_busy: omitted backend defaults to tmux for Grok's isolated fallback
@@ -149,3 +165,4 @@ ok - a dialog name on a first-sight stale reaches the away persistence line
 ok - a seen terminal status on the picker clears like a plain stale
 ok - a dialog name joins the escalation of an unseen status
 ok - a dialog name after demand-deep-inspection still escalates, and a declared wait still pauses
+daemon exit=0
