@@ -1,0 +1,25 @@
+=== [target] commit 765124c8; tmux tmux 3.6; pane command: tmux
+=== phase 1: worker declares a wait (paused:) - status signal
+watcher exit=0 ()
+--- wake line(s) printed:
+signal: /tmp/fm-lab.RaPEVJ/state/held.status
+--- stderr:
+--- drain presented:
+1795662674	2	signal	held.status	signal: /tmp/fm-lab.RaPEVJ/state/held.status
+wake annotation: latest wake-EVENT observed at drain, not current state: held.status: paused [at=1795662672]: awaiting the vendor rate-limit reset
+=== phase 2: parked worker, unchanged pane - first-sight stale
+watcher exit=0 (FM_PAUSE_RESURFACE_SECS=999)
+--- wake line(s) printed:
+stale: lab:fm-held (task=held)
+--- stderr:
+--- drain presented:
+1795662681	3	stale	lab:fm-held	stale: lab:fm-held (task=held)
+=== phase 3: 12s of real time pass with recheck cadence FM_PAUSE_RESURFACE_SECS=10 - parked-wait recheck
+watcher exit=0 (FM_PAUSE_RESURFACE_SECS=10)
+--- wake line(s) printed:
+stale: lab:fm-held (paused 23s, awaiting external - declared pause, rechecked on a long cadence not a wedge; confirm the wait still holds) task=held
+--- stderr:
+--- drain presented:
+1795662695	4	stale	lab:fm-held	stale: lab:fm-held (paused 23s, awaiting external - declared pause, rechecked on a long cadence not a wedge; confirm the wait still holds) task=held
+=== wake queue rows (durable):
+=== triage log:

@@ -1,0 +1,4 @@
+1795662767	start	gen=host-3907515-1795662766	primary=claude
+1795662783	handled	turn=host-3907515-1795662766.1	posture=away	rc=0	reports=1	error=0 cost=0.085973 conversation_cost=0.085973 input=10 cache_read=74927 cache_write=16635 output=1192 turns=5	signal: /tmp/fm-hostlab.CDDsq5/fm/state/held.status
+1795662797	handled	turn=host-3907515-1795662766.2	posture=away	rc=0	reports=1	error=0 cost=0.025311 conversation_cost=0.111284 input=10 cache_read=79856 cache_write=1929 output=959 turns=4	stale: lab:fm-held (task=held)
+1795662836	handled	turn=host-3907515-1795662766.3	posture=away	rc=0	reports=1	error=0 cost=0.031878 conversation_cost=0.143162 input=12 cache_read=110658 cache_write=2222 output=1190 turns=5	stale: lab:fm-held (paused 52s, awaiting external - declared pause, rechecked on a long cadence not a wedge; confirm the wait still holds) task=held

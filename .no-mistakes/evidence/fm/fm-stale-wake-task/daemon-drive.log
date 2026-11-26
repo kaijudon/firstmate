@@ -1,0 +1,15 @@
+~/.no-mistakes/evidence/01M8AWBB6NEQ7QNYR7JPYJ93W5/drive-daemon.sh: line 13: /tmp/fm-daemon-drive.oiRFZ2/first-sight/state/.subsuper-escalations: No such file or directory
+[first-sight]
+  wake: stale: lab:fm-held (task=held)
+  pause marker recorded: yes | wedge marker kept: no | escalations: 0 bytes
+  daemon log: [2026-11-26T11:12:56+0800] self-handle (paused): stale: lab:fm-held (task=held) -> paused (awaiting external), rechecked on a long cadence: paused: awaiting the vendor rate-limit reset|
+~/.no-mistakes/evidence/01M8AWBB6NEQ7QNYR7JPYJ93W5/drive-daemon.sh: line 13: /tmp/fm-daemon-drive.oiRFZ2/parked-recheck/state/.subsuper-escalations: No such file or directory
+[parked-recheck]
+  wake: stale: lab:fm-held (paused 23s, awaiting external - declared pause, rechecked on a long cadence not a wedge; confirm the wait still holds) task=held
+  pause marker recorded: yes | wedge marker kept: no | escalations: 0 bytes
+  daemon log: [2026-11-26T11:12:56+0800] self-handle (paused): stale: lab:fm-held (paused 23s, awaiting external - declared pause, rechecked on a long cadence not a wedge; confirm the wait still holds) task=held -> paused (awaiting external), rechecked on a long cadence: paused: awaiting the vendor rate-limit reset|
+~/.no-mistakes/evidence/01M8AWBB6NEQ7QNYR7JPYJ93W5/drive-daemon.sh: line 13: /tmp/fm-daemon-drive.oiRFZ2/adversarial-bare-suffix/state/.subsuper-escalations: No such file or directory
+[adversarial-bare-suffix]
+  wake: stale: lab:fm-held task=held
+  pause marker recorded: NO | wedge marker kept: YES | escalations: 0 bytes
+  daemon log: [2026-11-26T11:12:56+0800] self-handle: stale: lab:fm-held task=held -> transient stale (lab:fm-held task=held): no status|

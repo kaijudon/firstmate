@@ -1,0 +1,37 @@
+host parked, watcher live; claude 2.1.332 (Claude Code)
+after wait 1: stale turns settled >=1? rc=0
+after wait 2: stale turns settled >=2? rc=0
+--- host log
+1795662767	start	gen=host-3907515-1795662766	primary=claude
+1795662783	handled	turn=host-3907515-1795662766.1	posture=away	rc=0	reports=1	error=0 cost=0.085973 conversation_cost=0.085973 input=10 cache_read=74927 cache_write=16635 output=1192 turns=5	signal: /tmp/fm-hostlab.CDDsq5/fm/state/held.status
+1795662797	handled	turn=host-3907515-1795662766.2	posture=away	rc=0	reports=1	error=0 cost=0.025311 conversation_cost=0.111284 input=10 cache_read=79856 cache_write=1929 output=959 turns=4	stale: lab:fm-held (task=held)
+1795662836	handled	turn=host-3907515-1795662766.3	posture=away	rc=0	reports=1	error=0 cost=0.031878 conversation_cost=0.143162 input=12 cache_read=110658 cache_write=2222 output=1190 turns=5	stale: lab:fm-held (paused 52s, awaiting external - declared pause, rechecked on a long cadence not a wedge; confirm the wait still holds) task=held
+--- host.rc: 
+--- host.out
+watcher: started pid=3908577 (beacon fresh)
+--- outcomes
+{"seq":1,"epoch":1795662780,"task":"held","wake":"signal: /tmp/fm-hostlab.CDDsq5/fm/state/held.status","verdict":"routine","summary":"The demo worker 'held' reports it is paused, awaiting the vendor rate-limit reset. I could not confirm its current state (no local copy is recorded for it) or whether the limit has reset. No action taken; your away instructions say not to steer or stop any worker.","silent":false,"statusEndpoint":61,"statusIdent":"strong:49:176174:2026-11-26 11:12:47.532340558 +0800"}
+{"seq":2,"epoch":1795662794,"task":"held","wake":"stale: lab:fm-held (task=held)","verdict":"routine","summary":"The demo worker 'held' is idle and its screen shows it is still holding for the vendor rate-limit reset, matching its declared pause. Whether the limit has reset is unverified, and the state check still finds no local copy on record. No action taken; your away instructions say not to steer or stop any worker.","silent":false,"statusEndpoint":61,"statusIdent":"strong:49:176174:2026-11-26 11:12:47.532340558 +0800"}
+{"seq":3,"epoch":1795662833,"task":"held","wake":"stale: lab:fm-held (paused 52s, awaiting external - declared pause, rechecked on a long cadence not a wedge; confirm the wait still holds) task=held","verdict":"routine","summary":"Rechecked the demo worker 'held': its window is alive and its screen still reads that it is idle, holding for the vendor rate-limit reset, so the declared wait stands. Whether the vendor limit has actually reset is unverified, and the state check still finds no local copy on record. No action taken; your away instructions say not to steer or stop any worker.","silent":false,"statusEndpoint":61,"statusIdent":"strong:49:176174:2026-11-26 11:12:47.532340558 +0800"}
+--- watch triage
+[2026-11-26T11:13:15+0800] absorbed stale (paused, awaiting external, age 27s): lab:fm-held
+[2026-11-26T11:13:17+0800] absorbed stale (paused, awaiting external, age 30s): lab:fm-held
+[2026-11-26T11:13:18+0800] absorbed stale (paused, awaiting external, age 31s): lab:fm-held
+[2026-11-26T11:13:20+0800] absorbed stale (paused, awaiting external, age 33s): lab:fm-held
+[2026-11-26T11:13:22+0800] absorbed stale (paused, awaiting external, age 35s): lab:fm-held
+[2026-11-26T11:13:24+0800] absorbed stale (paused, awaiting external, age 37s): lab:fm-held
+[2026-11-26T11:13:27+0800] absorbed stale (paused, awaiting external, age 40s): lab:fm-held
+[2026-11-26T11:13:29+0800] absorbed stale (paused, awaiting external, age 42s): lab:fm-held
+[2026-11-26T11:13:30+0800] absorbed stale (paused, awaiting external, age 43s): lab:fm-held
+[2026-11-26T11:13:33+0800] absorbed stale (paused, awaiting external, age 46s): lab:fm-held
+[2026-11-26T11:13:36+0800] absorbed stale (paused, awaiting external, age 49s): lab:fm-held
+[2026-11-26T11:13:37+0800] absorbed stale (paused, awaiting external, age 50s): lab:fm-held
+[2026-11-26T11:13:42+0800] absorbed stale (paused, awaiting external, age 55s): lab:fm-held
+[2026-11-26T11:13:44+0800] absorbed stale (paused, awaiting external, age 57s): lab:fm-held
+[2026-11-26T11:13:46+0800] absorbed stale (paused, awaiting external, age 59s): lab:fm-held
+[2026-11-26T11:13:48+0800] absorbed stale (paused, awaiting external, age 61s): lab:fm-held
+[2026-11-26T11:13:49+0800] absorbed stale (paused, awaiting external, age 62s): lab:fm-held
+[2026-11-26T11:13:52+0800] absorbed stale (paused, awaiting external, age 65s): lab:fm-held
+[2026-11-26T11:13:54+0800] absorbed stale (paused, awaiting external, age 67s): lab:fm-held
+[2026-11-26T11:13:55+0800] absorbed stale (paused, awaiting external, age 68s): lab:fm-held
+driver exit=0
